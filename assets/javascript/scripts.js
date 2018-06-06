@@ -17,10 +17,9 @@ database.ref().once('value', function(snapshot){
     recipe = snapshot.val().recipe;
     bars = snapshot.val().bars;
     pullSwitch = true;
-    console.log(pullSwitch);
-}).then(function(){ajaxCaller();});
+})/*.then(function(){ajaxCallerRec();})*/;
 
-function ajaxCaller(){
+function ajaxCallerRec(){
     $.ajax({
         url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&instructionsRequired=false&intolerances=egg%2C+gluten&limitLicense=false&number=10&offset=0&query=olives&type=main+course",
         method: "GET",
@@ -34,6 +33,20 @@ function ajaxCaller(){
     });
 }
 
+function ajaxCallerBar(){
+    $.ajax({
+        url: "https://cors.io/?https://api.upcdatabase.org/product/072999493033/" + bars,
+        method: "GET",
+    }).then(function(response){
+        console.log(response);
+    });
+    
+}
+
 $("#click-me").click(function(){
-    ajaxCaller();
+    ajaxCallerRec();
 });
+
+$("#click-me2").click(function(){
+    ajaxCallerBar();
+})

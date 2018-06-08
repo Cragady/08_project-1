@@ -13,11 +13,11 @@ var recipe;
 var bars;
 var pullSwitch = false;
 
-database.ref().once('value', function(snapshot){
+database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
     bars = snapshot.val().bars;
     pullSwitch = true;
-})/*.then(function(){ajaxCallerRec();})*/;
+});//.then(function(){ajaxCallerRec();});
 
 function ajaxCallerRec(){
     $.ajax({

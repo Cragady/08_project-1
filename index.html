@@ -1,29 +1,141 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hangman...again.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/styles.css" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <script src="assets/game.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/styles/main.css" />
+
+    <title>Chef in Your Pantry</title>
 </head>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+    crossorigin="anonymous "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
+    crossorigin="anonymous "></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
+    crossorigin="anonymous "></script>
 
 <body>
+    <div class="container-fluid max">
+        <header>
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="assets/images/logo.png" class="logo" />
+                </div>
+                <div class="col-lg-8">
+                    <nav class=" navbar navbar-expand-lg navbar-light bg-light  navbar-right shadow">
+
+                        <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarText
+                    " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
+                            <span class="navbar-toggler-icon "></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarText ">
+                            <ul class="navbar-nav mr-auto push-right">
+                                <li class="nav-item active ">
+                                    <a class="nav-link " href="# ">Saved Recipes
+                                        <span class="sr-only ">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="# ">Features</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="# ">Pricing</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </nav>
+                </div>
+
+            </div>
+        </header>
+        <div class="row ">
+            <div class="col-lg-4">
+                <div id="add-recipes-container">
+                    <div class="card" style="width: 100%; max-width: 500px;">
+                        <img class="card-img-top" src="assets/images/recipe.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Enter Ingredients</h5>
+                            <p class="card-text">Either scan your ingredients into your pantry or manually enter them.</p>
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="modal" data-target="#exampleModal" href="#pills-home" role="tab"
+                                        aria-controls="pills-home" aria-selected="true">Scan</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+                                        aria-selected="false">Quick Entry</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"></div>
+                                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                    <form class="form-inline">
+
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <label for="inputPassword2" class="sr-only">ingredient</label>
+                                            <input type="text" class="form-control" id="inputPassword2" placeholder="enter recipe">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2">Enter Ingredient</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div id="pantry-container">
+                    <div class="card" style="width: 100%;">
+
+                        <div class="card-body">
+                            <h5 class="card-title">My Pantry</h5>
+
+                            <ul class="nav nav-pills mb-2">
+                                <li class="nav-item">
+                                    <a class="nav-link active cursor">Primary</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Scan Bar Code</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Add item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
-<script>
-    unirest.post("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/analyzeInstructions")
-        .header("X-Mashape-Key", "W4laQ4PRzKmshsyZBBc26Vhq8MPHp1arXBQjsnREA2w9584esk")
-        .header("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com")
-        .header("Content-Type", "application/x-www-form-urlencoded")
-        .send("instructions=Put the garlic in a pan and then add the onion.")
-        .end(function (result) {
-            console.log(result.status, result.headers, result.body);
-        });
-</script>
 
 </html>
+<!DOCTYPE html>
+<html>

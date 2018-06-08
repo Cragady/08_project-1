@@ -12,7 +12,7 @@ var config = {
 var recipe;
 var bars;
 var pullSwitch = false;
-var tempArray = [];
+var tempArray = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"]; //delete t1-t8 to make array empty after un commenting ajaxCallerBar()
 var foodsArray = [];
 var pantsArray = [];
 var searchParamArray = [];
@@ -22,7 +22,6 @@ database.ref().on('value', function(snapshot){
     bars = snapshot.val().bars;
     pullSwitch = true;
     pageStarter();
-    $('[data-toggle="tooltip"]').tooltip();
 });
 
 function ajaxCallerRec(){
@@ -63,19 +62,28 @@ buttonSetterFunk = function(){
         newBtn = $("<button>");
         btnInfo = tempArray[i];
         newBtn.text(btnInfo);
+        newBtn.css("background", "#c7cfdb");
         newBtn.attr({
             "data-word": tempArray[i],
             "data-selected": "no",
-            "class": "cray-selector"
+            "class": "btn m-1 cray-selector"
         });
         $("#pantry-items-show").append(newBtn);
     }
     tempArray = [];
 };
 //$(this).css("opacity", "0.5")for hover
+
 btnGrabber = function(){
 
-    $("body").on("click", "button.cray-selector", function(){
+    $("body").on({
+        mouseenter: function(){
+            $(this).css("opacity", "0.75");
+        },
+        mouseleave: function(){
+            $(this).css("opacity", "1");
+        },
+        click: function(){
         titleGrabber = $(this).attr("data-word");
         statusGrabber = $(this).attr("data-selected");
         pantryGrabber = $(this).attr("data-pantry")
@@ -108,13 +116,14 @@ btnGrabber = function(){
                 }
             }
         };
-    });
+    }}, "button.cray-selector");
 }
 
 pantsSet = function(){
     $("#pants-array-btn").click(function(){
         arrItem = "";
         arrItemShow = "";
+        locArray = [];
         if(foodsArray.length > 1){
             for(i = 0; i < foodsArray.length; i++){
                 arrItem += foodsArray[i] + "%20C";
@@ -131,11 +140,12 @@ pantsSet = function(){
         newPantsItem.text(arrItemShow);
         newPantsItem.attr({
             "data-pantry": arrItem,
-            "class": "card p-1 cray-selector",
+            "class": "card p-1 m-1 cray-selector",
             "data-selected": "no"
         });
         newPantsItem.css("background", "#c7cfdb");
         $("#pantry-items").append(newPantsItem);
+        console.log(foodsArray);
         arrItem = "";
         arrItemShow = "";
     });
@@ -143,7 +153,8 @@ pantsSet = function(){
 
 pageStarter = function(){
     btnGrabber();
-    ajaxCallerBar();
+    //ajaxCallerBar();
+    buttonSetterFunk(); //delete this after uncommenting ajaxCallerBar()
     pantsSet();
 }
 

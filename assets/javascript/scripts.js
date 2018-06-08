@@ -72,7 +72,7 @@ buttonSetterFunk = function(){
     }
     tempArray = [];
 };
-//$(this).css("opacity", "0.5")for hover
+//$(this).css("opacity", "0.5")for hover 
 
 btnGrabber = function(){
 

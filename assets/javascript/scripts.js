@@ -15,6 +15,7 @@ var pullSwitch = false;
 var tempArray = [];
 var foodsArray = [];
 var pantsArray = [];
+var searchParamArray = [];
 
 database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
@@ -64,27 +65,47 @@ buttonSetterFunk = function(){
         newBtn.text(btnInfo);
         newBtn.attr({
             "data-word": tempArray[i],
+            "data-selected": "no",
             "class": "cray-selector"
         });
         $("#pantry-items-show").append(newBtn);
-
     }
+    tempArray = [];
 };
-
+//$(this).css("opacity", "0.5")for hover
 btnGrabber = function(){
 
     $("body").on("click", "button.cray-selector", function(){
         titleGrabber = $(this).attr("data-word");
         statusGrabber = $(this).attr("data-selected");
-        if(titleGrabber !== undefined){
-            if(!foodsArray.includes(titleGrabber)){
-                foodsArray.push(titleGrabber);
-            }
-        };
+        pantryGrabber = $(this).attr("data-pantry")
         if(statusGrabber !== undefined){
             if(statusGrabber === "no"){
                 $(this).attr("data-selected", "yes");
+                $(this).css("background", "#86d6d6");
+                if(pantryGrabber !== undefined){
+                    searchParamArray.push(pantryGrabber);
+                    console.log(searchParamArray);
+                }
+                if(titleGrabber !== undefined){
+                    if(!foodsArray.includes(titleGrabber)){
+                        foodsArray.push(titleGrabber);
+                        console.log(foodsArray);
+                    }
+                }
                 
+            }
+            if(statusGrabber === "yes"){
+                $(this).attr("data-selected", "no");
+                $(this).css("background", "#c7cfdb")
+                if(pantryGrabber !== undefined){
+                    searchParamArray.splice($.inArray(pantryGrabber, searchParamArray),1);
+                    console.log(searchParamArray);
+                }
+                if(titleGrabber !== undefined){
+                    foodsArray.splice($.inArray(titleGrabber, foodsArray),1);
+                    console.log(foodsArray);
+                }
             }
         };
     });

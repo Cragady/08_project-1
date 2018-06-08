@@ -1,0 +1,38 @@
+body {
+    padding: 2%;
+    margin: 0;
+    background: url('../images/wood.jpg');
+}
+.max {
+    max-width: 1270px;
+}
+header {
+    width: 100%;
+    padding: 2% 0;
+    margin: 0 auto;
+    
+}
+.logo {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 3%;
+}
+.push-right {
+    margin: 0 0 0 auto !important;
+}
+.cursor {
+    cursor: pointer;
+}
+.padding {
+    padding-top: 3%;
+}   
+.shadow {
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    border-radius: 4px;
+}
+#word {
+    letter-spacing: 14px;
+    font-size: 2rem;
+    color: green;
+    text-align: center;
+}

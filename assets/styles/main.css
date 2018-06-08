@@ -23,6 +23,9 @@ header {
 .cursor {
     cursor: pointer;
 }
+.btn-right {
+    margin: 0 0 0 auto;
+}
 .padding {
     padding-top: 3%;
 }   
@@ -35,4 +38,57 @@ header {
     font-size: 2rem;
     color: green;
     text-align: center;
+}
+.my-pantry {
+    background: url('../images/diamonds.png');
+}
+#pantry-items {
+    columns: 4;
+}
+#pantry-items li {
+    list-style-type: none;
+}
+.ingredients {
+    border: 1px solid lightgrey;
+    padding: .5rem;    
+    margin: 0 .5% 1%.5%;
+    display: block;
+    width: 24% !important;
+}
+.ingredients:hover {
+    border-radius: 4px;
+    background: lightblue;
+    cursor: pointer;
+
+}
+.absolute-me {
+    position: relative;
+}
+.position-me {
+    position: relative;
+}
+@media all and (max-width: 575px) and (min-width: 0px) {
+
+    .position-me {
+        position: absolute;
+        right: .35rem;
+        top: 0;
+    }
+    .bg-light {
+        background: none !important;
+}
+.shadow {
+    border: none;
+    box-shadow: none;
+}
+.logo {
+    width: 34%;
+    max-width: 350px;
+    margin-bottom: 3%;
+}
+header {
+    background: darkgray;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
 }

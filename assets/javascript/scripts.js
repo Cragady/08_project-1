@@ -14,9 +14,10 @@ var bars;
 var pullSwitch = false;
 var tempArray = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"]; //delete t1-t8 to make array empty after un commenting ajaxCallerBar()
 var foodsArray = [];
-var pantsArray = [];
+var pantsArray;
 var searchParamArray = [];
 var sameValCheck = false;
+var testArrForPants; //delete after testing
 
 database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
@@ -117,7 +118,7 @@ btnGrabber = function(){
                 }
             }
         };
-    }}, "button.cray-selector", "button#pants-array-btn");
+    }}, "button.cray-selector");
 }
 
 function hasValue(arrPusher){
@@ -172,9 +173,28 @@ pantsSet = function(){
     });
 };
 
+previousIngredientsLister = function(){
+    if(pantsArray !== undefined){
+        for(i = 0; i < pantsArray.length; i++){
+            oldPantsItem = $("<button>");
+            oldPantsItem.text(pantsArray[i].arrItemShow);
+            oldPantsItem.attr({
+                "data-pantry": pantsArray[i].arrItem,
+                "class": "card p-1 m-1 cray-selector",
+                "data-selected": "no"
+            });
+            oldPantsItem.css("background", "#c7cfdb");
+            $("#pantry-items").append(oldPantsItem);    
+        }
+    } else {
+    pantsArray = [];
+    };
+};
+
 pageStarter = function(){
+    previousIngredientsLister();
     btnGrabber();
-    //ajaxCallerBar();
+    //ajaxCallerBar(); //disregard the comment below this, we'll tie this to a button
     buttonSetterFunk(); //delete this after uncommenting ajaxCallerBar()
     pantsSet();
 }

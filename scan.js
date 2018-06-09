@@ -1,0 +1,1 @@
+<script src="https://cdn.jsdelivr.net/npm/scandit-sdk@2.4.3"></script>

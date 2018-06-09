@@ -16,6 +16,7 @@ var tempArray = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"]; //delete t1-t8
 var foodsArray = [];
 var pantsArray = [];
 var searchParamArray = [];
+var sameValCheck = false;
 
 database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
@@ -116,7 +117,20 @@ btnGrabber = function(){
                 }
             }
         };
-    }}, "button.cray-selector");
+    }}, "button.cray-selector", "button#pants-array-btn");
+}
+
+function hasValue(arrPusher){
+    for(i = 0; i < pantsArray.length; i++){
+        for (let value of Object.values(pantsArray[i])) {
+          if(value === arrPusher){
+            sameValCheck = false;
+            console.log(sameValCheck);
+            console.log(value);
+          }
+        console.log(value);
+        }
+        }
 }
 
 pantsSet = function(){
@@ -124,10 +138,12 @@ pantsSet = function(){
         arrItem = "";
         arrItemShow = "";
         locArray = [];
+        sameValCheck = true;
         if(foodsArray.length > 1){
             for(i = 0; i < foodsArray.length; i++){
                 arrItem += foodsArray[i] + "%20C";
                 arrItemShow += foodsArray[i] + " ";
+                orderPants = {arrItemShow: arrItemShow, arrItem};
             }
         } else if (foodsArray.length === 1){
             arrItem = foodsArray[0];
@@ -135,19 +151,24 @@ pantsSet = function(){
         } else if(foodsArray.length === 0){
             return;
         };
-        console.log(arrItem);
-        newPantsItem = $("<button>");
-        newPantsItem.text(arrItemShow);
-        newPantsItem.attr({
-            "data-pantry": arrItem,
-            "class": "card p-1 m-1 cray-selector",
-            "data-selected": "no"
-        });
-        newPantsItem.css("background", "#c7cfdb");
-        $("#pantry-items").append(newPantsItem);
-        console.log(foodsArray);
-        arrItem = "";
-        arrItemShow = "";
+        console.log("set");
+        hasValue(arrItemShow);
+        if(sameValCheck === true){
+            pantsArray.push(orderPants);
+            console.log(pantsArray);
+            newPantsItem = $("<button>");
+            newPantsItem.text(arrItemShow);
+            newPantsItem.attr({
+                "data-pantry": arrItem,
+                "class": "card p-1 m-1 cray-selector",
+                "data-selected": "no"
+            });
+            newPantsItem.css("background", "#c7cfdb");
+            $("#pantry-items").append(newPantsItem);
+            console.log(foodsArray);
+            arrItem = "";
+            arrItemShow = "";
+        }
     });
 };
 

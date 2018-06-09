@@ -20,6 +20,9 @@ var sameValCheck = false;
 var itemResetArray;
 var ingredientResetter = false;
 
+
+/*sets the values required for the ajax calls
+then calls pageStarter() to activate button functionality*/
 database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
     bars = snapshot.val().bars;
@@ -55,6 +58,8 @@ function ajaxCallerBar(){
         });   
 }
 
+/*takes response from ajaxCallerBar() and makes it 
+readable to browser*/
 string_to_array = function (str) {
     return str.trim().split(" ");
 };
@@ -74,7 +79,6 @@ buttonSetterFunk = function(){
         $("#pantry-items-show").append(newBtn);
     }
 };
-//$(this).css("opacity", "0.5")for hover 
 
 btnGrabber = function(){
 
@@ -110,6 +114,7 @@ btnGrabber = function(){
                 $(this).css("background", "#c7cfdb")
                 if(pantryGrabber !== undefined){
                     searchParamArray.splice($.inArray(pantryGrabber, searchParamArray),1);
+                    console.log("this this" +pantryGrabber);
                     console.log(searchParamArray);
                 }
                 if(titleGrabber !== undefined){
@@ -130,22 +135,29 @@ function hasValue(arrPusher){
         for (let value of Object.values(pantsArray[i])) {
             if((value === arrPusher) && (ingredientResetter === false)){
                 sameValCheck = false;
-                console.log(sameValCheck);
-                console.log(value);
             } else if (ingredientResetter === true){
                 if(value === arrPusher){
                     tempArray = pantsArray[i].oldData.tempArray;
-                    console.log("temped the array of: " + tempArray);
+                    ingredientResetter = false;
+                    oldSelector = i;
                 };
             };
-        console.log(value);
         }
-        }
+    }
 }
 
 pantsSet = function(){
     $("#pants-array-btn").click(function(){
-        arrItem = "";
+        pushToPantry();
+    });
+};
+
+// $("#pants-array-set").click(function(){
+
+// });
+
+pushToPantry = function(){
+    arrItem = "";
         arrItemShow = "";
         sameValCheck = true;
         if(foodsArray.length > 0){
@@ -154,18 +166,18 @@ pantsSet = function(){
                 arrItemShow += foodsArray[i] + " ";
                 orderPants = {arrItemShow: arrItemShow, arrItem, oldData:{tempArray}};
             }
+            console.log(orderPants);
         } else if (foodsArray.length === 0){
             return;
         };
         hasValue(arrItemShow);
         if(sameValCheck === true){
             pantsArray.push(orderPants);
-            console.log(pantsArray);
             newPantsItem = $("<button>");
             newPantsItem.text(arrItemShow);
             newPantsItem.attr({
                 "data-pantry": arrItem,
-                "class": "card p-1 m-1 cray-selector",
+                "class": "card p-1 m-1 cray-selector second-cray",
                 "data-selected": "no"
             });
             newPantsItem.css("background", "#c7cfdb");
@@ -177,16 +189,44 @@ pantsSet = function(){
             foodsArray = [];
             tempArray = [];
         }
+};
+
+resetPantryItems = function(){
+    $("button#reset-pants-item").click(function(){
+        $("button.cray-selector.second-cray").css("background", "#f28aca");
+        ingredientResetter = true;
     });
 };
 
+typedItemEntry = function(){
+    $("button#quick-item-entry").click(function(event){
+        event.preventDefault();
+        typedPantryItem = $("#input-password-2").val().trim();
+        typedPantryItem = string_to_array(typedPantryItem);
+        tempArray = typedPantryItem;
+        for(i = 0; i < typedPantryItem.length; i++){
+            foodsArray.push(typedPantryItem[i]);
+        }
+        $("#input-password-2").val("");
+        pushToPantry();
+    });
+};
+
+// objectSifterSplicer = function(objInArr){
+//     for()
+//     pantsArray.splice($.inArray(indexPoint, pantsArray),1);
+// };
+
 oldDataLayer = function(oldSelector){
-    //ingredientResetter = true; //this will go in the actual button, not the function
-    console.log("selected" + oldSelector);
-    $(this).remove();
+    oldBtnSelector2 = $("button:contains(" + oldSelector + ")");
+    oldBtnSelector2.remove();
     hasValue(oldSelector);
-    ingredientResetter = false;
+    console.log(oldSelector);
+    pantsArray.splice(oldSelector, 1);
+    $("button.cray-selector.second-cray").css("background", "#f28aca");
     buttonSetterFunk();
+    $("button.cray-selector").css("background", "#c7cfdb");
+    
 };
 
 previousIngredientsLister = function(){
@@ -210,9 +250,11 @@ previousIngredientsLister = function(){
 
 pageStarter = function(){
     previousIngredientsLister();
+    resetPantryItems();
     btnGrabber();
     //ajaxCallerBar(); //disregard the comment below this, we'll tie this to a button
     buttonSetterFunk(); //delete this after uncommenting ajaxCallerBar()
+    typedItemEntry();
     pantsSet();
 }
 
@@ -222,3 +264,4 @@ pageStarter = function(){
 
 //%20C for spaces 
 //do concatenation for foodsArray from pantsArray
+//block item from being added to searchparamarray if ingredients resetter ===true

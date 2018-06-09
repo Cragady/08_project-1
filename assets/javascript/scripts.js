@@ -17,7 +17,8 @@ var foodsArray = [];
 var pantsArray;
 var searchParamArray = [];
 var sameValCheck = false;
-var testArrForPants; //delete after testing
+var itemResetArray;
+var ingredientResetter = false;
 
 database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
@@ -72,7 +73,6 @@ buttonSetterFunk = function(){
         });
         $("#pantry-items-show").append(newBtn);
     }
-    tempArray = [];
 };
 //$(this).css("opacity", "0.5")for hover 
 
@@ -118,17 +118,26 @@ btnGrabber = function(){
                 }
             }
         };
+        if(ingredientResetter === true){
+            oldDataGrabber = $(this).text();
+            oldDataLayer(oldDataGrabber);
+        }
     }}, "button.cray-selector");
 }
 
 function hasValue(arrPusher){
     for(i = 0; i < pantsArray.length; i++){
         for (let value of Object.values(pantsArray[i])) {
-          if(value === arrPusher){
-            sameValCheck = false;
-            console.log(sameValCheck);
-            console.log(value);
-          }
+            if((value === arrPusher) && (ingredientResetter === false)){
+                sameValCheck = false;
+                console.log(sameValCheck);
+                console.log(value);
+            } else if (ingredientResetter === true){
+                if(value === arrPusher){
+                    tempArray = pantsArray[i].oldData.tempArray;
+                    console.log("temped the array of: " + tempArray);
+                };
+            };
         console.log(value);
         }
         }
@@ -138,21 +147,16 @@ pantsSet = function(){
     $("#pants-array-btn").click(function(){
         arrItem = "";
         arrItemShow = "";
-        locArray = [];
         sameValCheck = true;
-        if(foodsArray.length > 1){
+        if(foodsArray.length > 0){
             for(i = 0; i < foodsArray.length; i++){
                 arrItem += foodsArray[i] + "%20C";
                 arrItemShow += foodsArray[i] + " ";
-                orderPants = {arrItemShow: arrItemShow, arrItem};
+                orderPants = {arrItemShow: arrItemShow, arrItem, oldData:{tempArray}};
             }
-        } else if (foodsArray.length === 1){
-            arrItem = foodsArray[0];
-            arrItemShow = foodsArray[0];
-        } else if(foodsArray.length === 0){
+        } else if (foodsArray.length === 0){
             return;
         };
-        console.log("set");
         hasValue(arrItemShow);
         if(sameValCheck === true){
             pantsArray.push(orderPants);
@@ -166,11 +170,23 @@ pantsSet = function(){
             });
             newPantsItem.css("background", "#c7cfdb");
             $("#pantry-items").append(newPantsItem);
-            console.log(foodsArray);
+            itemResetArray = foodsArray;
             arrItem = "";
             arrItemShow = "";
+            $("div#pantry-items-show").empty();
+            foodsArray = [];
+            tempArray = [];
         }
     });
+};
+
+oldDataLayer = function(oldSelector){
+    //ingredientResetter = true; //this will go in the actual button, not the function
+    console.log("selected" + oldSelector);
+    $(this).remove();
+    hasValue(oldSelector);
+    ingredientResetter = false;
+    buttonSetterFunk();
 };
 
 previousIngredientsLister = function(){
@@ -181,7 +197,8 @@ previousIngredientsLister = function(){
             oldPantsItem.attr({
                 "data-pantry": pantsArray[i].arrItem,
                 "class": "card p-1 m-1 cray-selector",
-                "data-selected": "no"
+                "data-selected": "no",
+                "data-old": pantsArray[i].oldData
             });
             oldPantsItem.css("background", "#c7cfdb");
             $("#pantry-items").append(oldPantsItem);    

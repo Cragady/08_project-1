@@ -36,3 +36,21 @@ header {
     color: green;
     text-align: center;
 }
+#recipe-card {
+    margin: 1rem auto;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    overflow: hidden;
+}
+#recipe-card h4 {
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 1rem;
+}
+#recipe-card img {
+    float: left;
+    width: 24%;
+}
+#recipe-card div#recipe-text {
+    float: right;
+    width:74%;
+}

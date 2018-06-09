@@ -19,6 +19,8 @@ var searchParamArray = [];
 var sameValCheck = false;
 var itemResetArray;
 var ingredientResetter = false;
+var ingredientDeleter = false;
+var splicedDiced = -1;
 
 
 /*sets the values required for the ajax calls
@@ -40,7 +42,6 @@ function ajaxCallerRec(){
             "accept": "application/json"
     }
     }).then(function(response){
-        console.log(response);
     });
 }
 
@@ -93,7 +94,7 @@ btnGrabber = function(){
         titleGrabber = $(this).attr("data-word");
         statusGrabber = $(this).attr("data-selected");
         pantryGrabber = $(this).attr("data-pantry")
-        if(statusGrabber !== undefined){
+        if((statusGrabber !== undefined) && (ingredientResetter === false) && (ingredientDeleter === false)){
             if(statusGrabber === "no"){
                 $(this).attr("data-selected", "yes");
                 $(this).css("background", "#86d6d6");
@@ -123,23 +124,26 @@ btnGrabber = function(){
                 }
             }
         };
-        if(ingredientResetter === true){
+        if((ingredientResetter === true) || (ingredientDeleter === true)){
             oldDataGrabber = $(this).text();
-            oldDataLayer(oldDataGrabber);
+
+            oldDataLayer(oldDataGrabber, splicedDiced);
         }
     }}, "button.cray-selector");
 }
 
 function hasValue(arrPusher){
-    for(i = 0; i < pantsArray.length; i++){
+    for(var i = 0; i < pantsArray.length; i++){
         for (let value of Object.values(pantsArray[i])) {
-            if((value === arrPusher) && (ingredientResetter === false)){
+            if((value === arrPusher) && (ingredientResetter === false) && (ingredientDeleter === false)){
                 sameValCheck = false;
-            } else if (ingredientResetter === true){
+            } else if ((ingredientResetter === true) || (ingredientDeleter === true)){
                 if(value === arrPusher){
                     tempArray = pantsArray[i].oldData.tempArray;
                     ingredientResetter = false;
-                    oldSelector = i;
+                    ingredientDeleter = false;
+                    splicedDiced = i;
+                    console.log("splicer set at: " + splicedDiced);
                 };
             };
         }
@@ -193,8 +197,45 @@ pushToPantry = function(){
 
 resetPantryItems = function(){
     $("button#reset-pants-item").click(function(){
-        $("button.cray-selector.second-cray").css("background", "#f28aca");
-        ingredientResetter = true;
+        thisButtonGrab = $("button#reset-pants-item");
+        resetSelector = $("button.cray-selector.second-cray");
+        resetStatus = thisButtonGrab.attr("data-resetting");
+        if(resetStatus === "no"){
+            thisButtonGrab.attr("data-resetting", "yes");
+            resetSelector.css("background", "#f28aca");
+            resetSelector.attr("data-selected", "no");
+            searchParamArray = [];
+            ingredientResetter = true;
+        }
+        if(resetStatus === "yes"){
+            thisButtonGrab.attr("data-resetting", "no");
+            resetSelector.css("background", "#c7cfdb");
+            resetSelector.attr("data-selected", "no");
+            ingredientResetter = false;
+        };
+        
+    });
+};
+
+deletePantryItems = function(){
+    $("button#delete-pants-item").click(function(){
+        thisButtonGrab = $("button#delete-pants-item");
+        resetSelector = $("button.cray-selector.second-cray");
+        resetStatus = thisButtonGrab.attr("data-deleting");
+        if(resetStatus === "no"){
+            thisButtonGrab.attr("data-deleting", "yes");
+            resetSelector.css("background", "#dd0837");
+            resetSelector.attr("data-selected", "no");
+            searchParamArray = [];
+            ingredientDeleter = true;
+        }
+        if(resetStatus === "yes"){
+            thisButtonGrab.attr("data-deleting", "no");
+            resetSelector.css("background", "#c7cfdb");
+            resetSelector.attr("data-selected", "no");
+            ingredientDeleter = false;
+        };
+        
     });
 };
 
@@ -217,17 +258,25 @@ typedItemEntry = function(){
 //     pantsArray.splice($.inArray(indexPoint, pantsArray),1);
 // };
 
-oldDataLayer = function(oldSelector){
+oldDataLayer = function(oldSelector, arrObjSplicer){
     oldBtnSelector2 = $("button:contains(" + oldSelector + ")");
     oldBtnSelector2.remove();
-    hasValue(oldSelector);
-    console.log(oldSelector);
-    pantsArray.splice(oldSelector, 1);
-    $("button.cray-selector.second-cray").css("background", "#f28aca");
-    buttonSetterFunk();
+    if(ingredientResetter === true){
+        hasValue(oldSelector);
+        buttonSetterFunk();
+    } else {
+        hasValue(oldSelector);
+    };
+    if(splicedDiced !== -1){
+        pantsArray.splice(splicedDiced, 1);
+    }
     $("button.cray-selector").css("background", "#c7cfdb");
     
 };
+
+//if ingredientsResetter == true,
+    //if button is clicked get value
+        //splice at indeOf value
 
 previousIngredientsLister = function(){
     if(pantsArray !== undefined){
@@ -251,6 +300,7 @@ previousIngredientsLister = function(){
 pageStarter = function(){
     previousIngredientsLister();
     resetPantryItems();
+    deletePantryItems();
     btnGrabber();
     //ajaxCallerBar(); //disregard the comment below this, we'll tie this to a button
     buttonSetterFunk(); //delete this after uncommenting ajaxCallerBar()
@@ -264,4 +314,4 @@ pageStarter = function(){
 
 //%20C for spaces 
 //do concatenation for foodsArray from pantsArray
-//block item from being added to searchparamarray if ingredients resetter ===true
+//make item deletions and item changes happen from modal

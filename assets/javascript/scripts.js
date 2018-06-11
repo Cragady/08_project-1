@@ -255,11 +255,6 @@ typedItemEntry = function(){
     });
 };
 
-// objectSifterSplicer = function(objInArr){
-//     for()
-//     pantsArray.splice($.inArray(indexPoint, pantsArray),1);
-// };
-
 oldDataLayer = function(oldSelector, arrObjSplicer){
     oldBtnSelector2 = $("button:contains(" + oldSelector + ")");
     oldBtnSelector2.remove();
@@ -276,10 +271,6 @@ oldDataLayer = function(oldSelector, arrObjSplicer){
     $("button.cray-selector").css("background", "#c7cfdb");
     
 };
-
-//if ingredientsResetter == true,
-    //if button is clicked get value
-        //splice at indeOf value
 
 previousIngredientsLister = function(){
     if(pantsArray !== undefined){
@@ -323,5 +314,3 @@ pageStarter = function(){
 
 
 //%20C for spaces 
-//do concatenation for foodsArray from pantsArray
-//make item deletions and item changes happen from modal

@@ -320,3 +320,10 @@ pageStarter = function(){
 
 
 //%20C for spaces 
+//add delete entire item in modal
+/*add update for deleting/resetting in modal
+  so that user has to finish deleting/restting before adding
+  another item*/
+/*add button for cancelation of resetting deleting
+  if user is resetting/deleting change button text and color
+  depending on which one*/

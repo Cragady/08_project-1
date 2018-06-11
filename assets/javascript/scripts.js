@@ -28,6 +28,7 @@ then calls pageStarter() to activate button functionality*/
 database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
     bars = snapshot.val().bars;
+    bars2 = snapshot.val().bars2;
     pullSwitch = true;
     pageStarter();
 });
@@ -153,6 +154,7 @@ function hasValue(arrPusher){
 pantsSet = function(){
     $("#pants-array-btn").click(function(){
         pushToPantry();
+        $("#my-modal").modal("toggle");
     });
 };
 
@@ -264,6 +266,7 @@ oldDataLayer = function(oldSelector, arrObjSplicer){
     if(ingredientResetter === true){
         hasValue(oldSelector);
         buttonSetterFunk();
+        $("#my-modal").modal("toggle");
     } else {
         hasValue(oldSelector);
     };
@@ -297,6 +300,12 @@ previousIngredientsLister = function(){
     };
 };
 
+scanButtonInput = function(){
+    $("#pills-home-tab-btn").click(function(){
+        $("#my-modal").modal("toggle");
+    });
+};
+
 pageStarter = function(){
     previousIngredientsLister();
     resetPantryItems();
@@ -306,6 +315,7 @@ pageStarter = function(){
     buttonSetterFunk(); //delete this after uncommenting ajaxCallerBar()
     typedItemEntry();
     pantsSet();
+    scanButtonInput();
 }
 
 

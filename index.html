@@ -70,7 +70,7 @@
                             <p class="card-text">Either scan your ingredients into your pantry or manually enter them.</p>
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item btn-right">
-                                    <a class="nav-link active" id="pills-home-tab" data-toggle="modal" data-target="#exampleModal" href="#pills-home" role="tab"
+                                    <a class="nav-link active" id="pills-home-tab-btn" data-toggle="modal" data-target="#exampleModal" href="#pills-home" role="tab"
                                         aria-controls="pills-home" aria-selected="true">Scan</a>
                                 </li>
 
@@ -114,15 +114,23 @@
 
                             </ul> -->
                             <div class ="container-fluid">
-                                <button id="reset-pants-item" class="nav-link active cursor" data-resetting="no">Reset Item</button>
-                                <button id="delete-pants-item" class="nav-link active cursor" data-deleting="no">Delete Item</button>
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item btn-right">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="pantry-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Edit Items
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="pantry-dropdown">
+                                                    <button id="reset-pants-item" class="dropdown-item" data-resetting="no">Reset Item</button>
+                                                    <button id="delete-pants-item" class="dropdown-item" data-deleting="no">Delete Item</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
+                            <hr>
                             <div class="container-fluid">
                                 <div class="row text-center" id="pantry-items">
-                                    <div class="ingredients">test</div>
-                                    <div class="ingredients">test</div>
-                                    <div class="ingredients">test</div>
-                                    <div class="ingredients">test</div>
 
                                 </div>
                             </div>
@@ -138,46 +146,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- THIS IS PANTRY IS HIDDEN --> <!--For testing purposes I 
-                displayed it, it will switch between none and flex for item
-            inputs-->
-                <div id="pants-array-set" style="display: flex;">
-                    <div class="card my-pantry" style="width: 100%;">
-
-                        <div class="card-body">
-                            <h5 class="card-title">My Item</h5>
-                            <!-- <ul id="pantry-items-setter">
-                                <li class="ingredients">test</li>
-                                <li class="ingredients">test</li>
-                                <li class="ingredients">test</li>
-                                <li class="ingredients">test</li>
-                                <li class="ingredients">test</li>
-                                <li class="ingredients">test</li>
-
-                            </ul> -->
-                            <div class="container-fluid">
-                                <div class="row text-center" id="pantry-items-show">
-                                    <div class="ingredients">test</div>
-                                    <div class="ingredients">test</div>
-                                    <div class="ingredients">test</div>
-                                    <div class="ingredients">test</div>
-
-                                </div>
-                            </div>
-                            <!-- DYNAMICALLY ADDED ITEMS IN DIVS -->
-                            <!-- EXAMPLE DIVS -->
-                            <ul class="nav nav-pills mb-2">
-                                <li class="nav-item btn-right">
-                                    <button id="pants-array-btn" class="nav-link active cursor">Submit to Pantry</button>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="my-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -186,12 +158,12 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        ...
+                    <div id="pantry-items-show" class="modal-body">
+                        .
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Add item</button>
+                        <button type="button" id="pants-array-btn" class="btn btn-primary">Add item</button>
                     </div>
                 </div>
             </div>

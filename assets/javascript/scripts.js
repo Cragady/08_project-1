@@ -189,6 +189,8 @@ pushToPantry = function(){
             newPantsItem.attr({
                 "data-pantry": arrItem,
                 "data-modal": "no",
+                "data-resetting": "no",
+                "data-deleting": "no",
                 "class": "card p-1 m-1 cray-selector second-cray",
                 "data-selected": "no"
             });
@@ -208,18 +210,26 @@ resetPantryItems = function(){
         thisButtonGrab = $("button#reset-pants-item");
         resetSelector = $("button.cray-selector.second-cray");
         resetStatus = thisButtonGrab.attr("data-resetting");
-        if(resetStatus === "no"){
-            thisButtonGrab.attr("data-resetting", "yes");
-            resetSelector.css("background", "#f28aca");
-            resetSelector.attr("data-selected", "no");
-            searchParamArray = [];
-            ingredientResetter = true;
-        }
+        deleteCheck = resetSelector.attr("data-deleting");
+        if(deleteCheck === "no"){
+            if(resetStatus === "no"){
+                thisButtonGrab.attr("data-resetting", "yes");
+                thisButtonGrab.attr("data-deleting", "no");
+                resetSelector.css("background", "#f28aca");
+                resetSelector.attr("data-selected", "no");
+                searchParamArray = [];
+                ingredientResetter = true;
+                ingredientDeleter = false;
+            };
+        };
+            
         if(resetStatus === "yes"){
             thisButtonGrab.attr("data-resetting", "no");
+            thisButtonGrab.attr("data-deleting", "no");
             resetSelector.css("background", "#c7cfdb");
             resetSelector.attr("data-selected", "no");
             ingredientResetter = false;
+            ingredientDeleter = false;
         };
         
     });
@@ -230,18 +240,26 @@ deletePantryItems = function(){
         thisButtonGrab = $("button#delete-pants-item");
         resetSelector = $("button.cray-selector.second-cray");
         resetStatus = thisButtonGrab.attr("data-deleting");
-        if(resetStatus === "no"){
-            thisButtonGrab.attr("data-deleting", "yes");
-            resetSelector.css("background", "#dd0837");
-            resetSelector.attr("data-selected", "no");
-            searchParamArray = [];
-            ingredientDeleter = true;
-        }
+        resetCheck = resetSelector.attr("data-resetting");
+        if(resetCheck === "no"){
+            if(resetStatus === "no"){
+                thisButtonGrab.attr("data-deleting", "yes");
+                thisButtonGrab.attr("data-resetting", "no");
+                resetSelector.css("background", "#dd0837");
+                resetSelector.attr("data-selected", "no");
+                searchParamArray = [];
+                ingredientDeleter = true;
+                ingredientResetter = false;
+            };
+        };
+            
         if(resetStatus === "yes"){
             thisButtonGrab.attr("data-deleting", "no");
+            thisButtonGrab.attr("data-resetting", "no");
             resetSelector.css("background", "#c7cfdb");
             resetSelector.attr("data-selected", "no");
             ingredientDeleter = false;
+            ingredientResetter = false;
         };
         
     });

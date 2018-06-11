@@ -76,6 +76,7 @@ buttonSetterFunk = function(){
         newBtn.attr({
             "data-word": tempArray[i],
             "data-selected": "no",
+            "data-modal": "yes",
             "class": "btn m-1 cray-selector"
         });
         $("#pantry-items-show").append(newBtn);
@@ -126,10 +127,14 @@ btnGrabber = function(){
             }
         };
         if((ingredientResetter === true) || (ingredientDeleter === true)){
-            oldDataGrabber = $(this).text();
+            modalChecker = $(this).attr("data-modal");
+            console.log(modalChecker);
+            if(modalChecker === "no"){
+                oldDataGrabber = $(this).text();
 
-            oldDataLayer(oldDataGrabber, splicedDiced);
-        }
+                oldDataLayer(oldDataGrabber, splicedDiced);
+            };
+        };
     }}, "button.cray-selector");
 }
 
@@ -183,6 +188,7 @@ pushToPantry = function(){
             newPantsItem.text(arrItemShow);
             newPantsItem.attr({
                 "data-pantry": arrItem,
+                "data-modal": "no",
                 "class": "card p-1 m-1 cray-selector second-cray",
                 "data-selected": "no"
             });

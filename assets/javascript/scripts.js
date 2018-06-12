@@ -11,8 +11,7 @@ var config = {
 
 var recipe;
 var bars;
-var pullSwitch = false;
-var tempArray = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"]; //delete t1-t8 to make array empty after un commenting ajaxCallerBar()
+var tempArray = []; //delete t1-t8 to make array empty after un commenting ajaxCallerBar()
 var foodsArray = [];
 var pantsArray;
 var searchParamArray = [];
@@ -21,6 +20,7 @@ var itemResetArray;
 var ingredientResetter = false;
 var ingredientDeleter = false;
 var splicedDiced = -1;
+var manuScanu;
 
 
 /*sets the values required for the ajax calls
@@ -29,7 +29,6 @@ database.ref().on('value', function(snapshot){
     recipe = snapshot.val().recipe;
     bars = snapshot.val().bars;
     bars2 = snapshot.val().bars2;
-    pullSwitch = true;
     pageStarter();
 });
 
@@ -46,15 +45,13 @@ function ajaxCallerRec(){
     });
 }
 
-function ajaxCallerBar(){
+function ajaxCallerBar(newItemScan){
     $.ajax({
-        url: "https://cors.io/?https://api.upcdatabase.org/product/072999493033/" + bars,
+        url: "https://cors.io/?https://api.upcdatabase.org/product/" + newItemScan + "/" + bars,
         method: "GET",
 
     }).then(function(response){
         var obj = JSON.parse(response);
-        var barcodeData = $("<button>")
-
         tempArray = string_to_array(obj.title);
         buttonSetterFunk();
         });   
@@ -321,6 +318,17 @@ scanButtonInput = function(){
     });
 };
 
+scannerAutoInput = function(){
+    $("#auto-scanner-input").on("keydown", function(e){
+        if (e.keyCode === 13){
+            manuScanu = $("#auto-scanner-input").val();
+            $("#auto-scanner-input").val("");
+            $("#my-modal").modal("toggle");
+            ajaxCallerBar(manuScanu);
+        };      
+    });
+};
+
 pageStarter = function(){
     previousIngredientsLister();
     resetPantryItems();
@@ -331,6 +339,7 @@ pageStarter = function(){
     typedItemEntry();
     pantsSet();
     scanButtonInput();
+    scannerAutoInput();
 }
 
 

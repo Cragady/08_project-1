@@ -40,7 +40,7 @@ function ajaxCallerRec(rName) {
         headers: {
             "X-Mashape-Key": recipe,
             "accept": "application/json"
-        };
+        }
     }).then(function (response) {
         console.log(response);
         var mainCards = $("#main-recipe-container");

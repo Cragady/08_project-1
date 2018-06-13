@@ -3,12 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Scandit Web SDK</title>
+    <title>Web Barcode Scanner</title>
 
     <!--
         Add the library, as explained on http://docs.scandit.com/stable/web/index.html
     -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script></script>
     <script src="https://unpkg.com/scandit-sdk"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
     <!-- or -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/scandit-sdk"></script> -->
     <!-- or -->
@@ -76,8 +78,30 @@
     <div id="scandit-barcode-result">No codes scanned yet</div>
     <!-- Button to continue scanning after a barcode was scanned -->
     <button id="continue-scanning-button" onclick="continueScanning()">Continue Scanning</button>
+    <form action="index.html">
+        <input type="submit" value="Return to Main Page" />
+    </form>
 
     <script>
+
+    var config = {
+    apiKey: "AIzaSyDBvYQ7mCwkZnL6eMdy9kqQ-wSB9aySqMw",
+    authDomain: "chef-in-your-pantry.firebaseapp.com",
+    databaseURL: "https://chef-in-your-pantry.firebaseio.com",
+    projectId: "chef-in-your-pantry",
+    storageBucket: "chef-in-your-pantry.appspot.com",
+    messagingSenderId: "982672855907"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    database.ref().on('value', function(snapshot){
+ 
+    bars2 = snapshot.val().bars2;
+
+    localStorage.clear();
+
+
         // Helper function called when the "Continue Scanning" button is clicked
         function continueScanning() {
             if (picker) {
@@ -87,7 +111,7 @@
             }
         }
         // Configure the library and activate it with a license key
-        const licenseKey = "Afe7dVoiRpKYPHgW9zBbSSwGXJXGAYbWZ2edpIZ/Lk1NczphYGdXNIlB+WhBYC3n3igg4F5ONmgvFZBd/WQoWvJ0XJkna+ZUcl7YFs5hmJizNWzeYRe8rKEwclDY7UR350YRpxCCbzDENqqrRjvjpg31TVOMKDex74qDuSQvIotbwpeOH/3YXiVixQV3iP2/CHT8W4LbcgccqjqefVhIzEmQJ29ioV8syYQWqys6zxjmhEkpwuTiXdpTxTu7feXQW+I0WMyGQf8Y9blZSDmyZ2Y5IXMwU3CUt2nOK1i/GHG9TAOgFVkVkI3MMegH4U2ar8lieMEzoq2h1Ku95R8VRhorOQE5gzLaZK1YQ28GWWF/W4Ql/Gw50fB8aIcvZDCMXEpmlPTtZndGb8kPHTeiK/MGyg88yuz3hPfKusrc1ICdY9AfrA0NznTv8n1Nal+Eshf/mIw3TyiBvAqLiH68GtFaMFs4dOoldNaJ9jo+1cfeDyIlRXwFV0jwZWxNmvPZud3po8xKRQK4vONnftu//7J+pNs7VNd48b/pb75BFrOj2lYvpVdDV5qHNEMs1GEuxmZpvggbP8UVKCU7nbUv9Z8NlH/XTOpPMDuQJcRYm9Z/qogKDkewRuGe2UAgJHMvfxCetzqS4pdVo5GnaNZHPcXWgKRG8KKeySs8loAWkFEU2ZzsGg8Q04cJXlcFCfzXxRv7JwNT7X1AwcZ93yMdWc12+yZul86DP+8pSAWLzw9OQ7pWdoIpcJGYOlkioZORzdR5+CrsW97n16UrK0XLbwXSsU5kxNQRMFc=";
+        const licenseKey = bars2;
         // const engineLocation = "build"; // the folder containing the engine
         // or, if using a CDN,
         const engineLocation = "https://unpkg.com/scandit-sdk/build"
@@ -123,6 +147,9 @@
                         string +
                         `${ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology)}: ${barcode.data}<br>`,
                         '');
+                        console.log(resultContainer.innerHTML);
+                        // localStorage.setItem("barcode", username);
+                        continueScanning()
                 });
                 picker.onScanError(error => {
                     alert(error.message);
@@ -132,6 +159,8 @@
             .catch(error => {
                 alert(error);
             });
+
+        });
     </script>
 </body>
 

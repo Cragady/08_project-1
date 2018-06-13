@@ -40,7 +40,7 @@ function ajaxCallerRec(rName) {
         headers: {
             "X-Mashape-Key": recipe,
             "accept": "application/json"
-        }
+        };
     }).then(function (response) {
         console.log(response);
         var mainCards = $("#main-recipe-container");
@@ -69,7 +69,7 @@ function ajaxCallerRec(rName) {
 
 
     });
-}
+};
 function showRecipe() {
     $("#pants-array-set").click(function () {
         executedSearch = searchParamArray.join("");
@@ -88,7 +88,7 @@ function ajaxCallerBar(newItemScan) {
         tempArray = string_to_array(obj.title);
         buttonSetterFunk();
     });
-}
+};
 
 /*takes response from ajaxCallerBar() and makes it 
 readable to browser*/
@@ -110,7 +110,7 @@ buttonSetterFunk = function () {
             "class": "btn m-1 cray-selector"
         });
         $("#pantry-items-show").append(newBtn);
-    }
+    };
 };
 
 btnGrabber = function () {
@@ -159,9 +159,9 @@ btnGrabber = function () {
                     oldDataLayer(oldDataGrabber, splicedDiced);
                 };
             };
-        }
+        };
     }, "button.cray-selector");
-}
+};
 
 function hasValue(arrPusher) {
     for (var i = 0; i < pantsArray.length; i++) {
@@ -176,9 +176,9 @@ function hasValue(arrPusher) {
                     splicedDiced = i;
                 };
             };
-        }
-    }
-}
+        };
+    };
+};
 
 pantsSet = function () {
     $("#pants-array-btn").click(function () {
@@ -221,7 +221,7 @@ pushToPantry = function () {
         $("div#pantry-items-show").empty();
         foodsArray = [];
         tempArray = [];
-    }
+    };
 };
 
 resetPantryItems = function () {
@@ -292,7 +292,7 @@ typedItemEntry = function () {
         tempArray = typedPantryItem;
         for (i = 0; i < typedPantryItem.length; i++) {
             foodsArray.push(typedPantryItem[i]);
-        }
+        };
         $("#input-password-2").val("");
         pushToPantry();
     });
@@ -310,7 +310,7 @@ oldDataLayer = function (oldSelector, arrObjSplicer) {
     };
     if (splicedDiced !== -1) {
         pantsArray.splice(splicedDiced, 1);
-    }
+    };
     $("button.cray-selector").css("background", "#c7cfdb");
 
 };
@@ -328,7 +328,7 @@ previousIngredientsLister = function () {
             });
             oldPantsItem.css("background", "#c7cfdb");
             $("#pantry-items").append(oldPantsItem);
-        }
+        };
     } else {
         pantsArray = [];
     };
@@ -350,13 +350,13 @@ webCamScanner = function(){
                 continueButton.disabled = true;
                 // Resume scanning
                 picker.resumeScanning();
-            }
-        }
+            };
+        };
         // Configure the library and activate it with a license key
         const licenseKey = bars2;
         // const engineLocation = "build"; // the folder containing the engine
         // or, if using a CDN,
-        const engineLocation = "https://unpkg.com/scandit-sdk/build"
+        const engineLocation = "https://unpkg.com/scandit-sdk/build";
         ScanditSDK.configure(licenseKey, { engineLocation: engineLocation });
         const scannerContainer = document.getElementById("scandit-barcode-picker");
         const resultContainer = document.getElementById("scandit-barcode-result");
@@ -368,7 +368,7 @@ webCamScanner = function(){
         ScanditSDK.BarcodePicker.create(scannerContainer, {
                 playSoundOnScan: true,
                 vibrateOnScan: true
-            })
+            });
             .then(barcodePicker => {
                 picker = barcodePicker;
                 // Create the settings object to be applied to the scanner
@@ -391,17 +391,17 @@ webCamScanner = function(){
                         '');
                         console.log(resultContainer.innerHTML);
                         // localStorage.setItem("barcode", username);
-                        continueScanning()
+                        continueScanning();
                 });
                 picker.onScanError(error => {
                     alert(error.message);
                 });
                 picker.resumeScanning();
-            })
+            });
             .catch(error => {
                 alert(error);
             });
-    })
+    });
 };
 
 scannerAutoInput = function () {

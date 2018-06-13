@@ -11,7 +11,7 @@ var database = firebase.database();
 
 var recipe;
 var bars;
-var tempArray = []; //delete t1-t8 to make array empty after un commenting ajaxCallerBar()
+var tempArray = [];
 var foodsArray = [];
 var pantsArray;
 var searchParamArray = [];
@@ -35,7 +35,6 @@ database.ref().on('value', function (snapshot) {
 function ajaxCallerRec(rName) {
     $.ajax({
         url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=" + rName,
-        // url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=noodles%2Ctomatoes",
         method: "GET",
 
         headers: {
@@ -194,10 +193,6 @@ pantsSet = function () {
         $("#my-modal").modal("toggle");
     });
 };
-
-// $("#pants-array-set").click(function(){
-
-// });
 
 pushToPantry = function () {
     arrItem = "";
@@ -369,23 +364,10 @@ pageStarter = function () {
     resetPantryItems();
     deletePantryItems();
     btnGrabber();
-    //ajaxCallerBar(); //disregard the comment below this, we'll tie this to a button
-    buttonSetterFunk(); //delete this after uncommenting ajaxCallerBar()
     typedItemEntry();
     pantsSet();
     scanButtonInput();
     scannerAutoInput();
     showRecipe();
-    // ajaxCallerRec();
 }
 
-
-
-
-
-//%20C for spaces 
-//add delete entire item in modal
-/*add update for resetting in modal
-  so that user has to finish restting before adding
-  another item*/
-//*add button for cancelation of resetting or deleting

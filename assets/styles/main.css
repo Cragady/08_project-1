@@ -23,6 +23,9 @@ header {
 .cursor {
     cursor: pointer;
 }
+.btn-right {
+    margin: 0 0 0 auto;
+}
 .padding {
     padding-top: 3%;
 }   
@@ -36,3 +39,179 @@ header {
     color: green;
     text-align: center;
 }
+.my-pantry {
+    background: url('../images/diamonds.png');
+}
+#pantry-items {
+    columns: 4;
+}
+#pantry-items li {
+    list-style-type: none;
+}
+.ingredients {
+    border: 1px solid lightgrey;
+    padding: .5rem;    
+    margin: 0 .5% 1%.5%;
+    display: block;
+    width: 24% !important;
+}
+.ingredients:hover {
+    border-radius: 4px;
+    background: lightblue;
+    cursor: pointer;
+
+}
+.absolute-me {
+    position: relative;
+}
+.position-me {
+    position: relative;
+}
+.border-me {
+
+    position: relative;
+    margin: 1rem auto;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    overflow: hidden;
+    background: white;
+
+}
+#recipe-card {
+    margin: 1rem;
+    position: relative;
+}
+#recipe-card img {
+    width: 25%;
+    max-width: 210px;
+}
+#recipe-card div#recipe-text {
+    float: right;
+
+    width: 73%;
+    
+    margin-left: 1%;
+}
+#recipe-card div#recipe-text span {
+    display: block;
+}
+.link-box {
+    width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+
+}
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  @-webkit-keyframes bounceInUp {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 3000px, 0);
+      transform: translate3d(0, 3000px, 0);
+    }
+  
+    60% {
+      opacity: 1;
+      -webkit-transform: translate3d(0, -20px, 0);
+      transform: translate3d(0, -20px, 0);
+    }
+  
+    75% {
+      -webkit-transform: translate3d(0, 10px, 0);
+      transform: translate3d(0, 10px, 0);
+    }
+  
+    90% {
+      -webkit-transform: translate3d(0, -5px, 0);
+      transform: translate3d(0, -5px, 0);
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes bounceInUp {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 3000px, 0);
+      transform: translate3d(0, 3000px, 0);
+    }
+  
+    60% {
+      opacity: 1;
+      -webkit-transform: translate3d(0, -20px, 0);
+      transform: translate3d(0, -20px, 0);
+    }
+  
+    75% {
+      -webkit-transform: translate3d(0, 10px, 0);
+      transform: translate3d(0, 10px, 0);
+    }
+  
+    90% {
+      -webkit-transform: translate3d(0, -5px, 0);
+      transform: translate3d(0, -5px, 0);
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .bounceInUp {
+    -webkit-animation-name: bounceInUp;
+    animation-name: bounceInUp;
+  }
+@media all and (max-width: 575px) and (min-width: 0px) {
+
+    .position-me {
+    position: absolute;
+    right: .35rem;
+    top: 0;
+    }
+    .bg-light {
+    background: none !important;
+    }
+    .shadow {
+    border: none;
+    box-shadow: none;
+    }
+    .logo {
+    width: 34%;
+    max-width: 350px;
+    margin-bottom: 3%;
+    }
+    header {
+    background: darkgray;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+}
+

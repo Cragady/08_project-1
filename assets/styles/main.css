@@ -39,6 +39,19 @@ header {
     color: green;
     text-align: center;
 }
+#scandit-barcode-picker {
+    max-height: 70vh;
+}
+#scandit-barcode-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+}
+#continue-scanning-button {
+    margin-bottom: 10vh;
+}
 .my-pantry {
     background: url('../images/diamonds.png');
 }

@@ -99,7 +99,6 @@ btnGrabber = function(){
                 $(this).css("background", "#86d6d6");
                 if(pantryGrabber !== undefined){
                     searchParamArray.push(pantryGrabber);
-                    console.log(searchParamArray);
                 }
                 if(titleGrabber !== undefined){
                     if(!foodsArray.includes(titleGrabber)){

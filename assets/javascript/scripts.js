@@ -67,8 +67,13 @@ function ajaxCallerRec() {
         headers: {
             "X-Mashape-Key": recipe,
             "accept": "application/json"
+<<<<<<< HEAD
         }
     }).then(function (response) {
+=======
+    }
+    }).then(function(response){
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
     });
 }
 
@@ -102,6 +107,7 @@ buttonSetterFunk = function () {
         newBtn.attr({
             "data-word": tempArray[i],
             "data-selected": "no",
+            "data-modal": "yes",
             "class": "btn m-1 cray-selector"
         });
         $("#pantry-items-show").append(newBtn);
@@ -117,6 +123,7 @@ btnGrabber = function () {
         mouseleave: function () {
             $(this).css("opacity", "1");
         },
+<<<<<<< HEAD
         click: function () {
             titleGrabber = $(this).attr("data-word");
             statusGrabber = $(this).attr("data-selected");
@@ -136,6 +143,19 @@ btnGrabber = function () {
                         }
                     }
 
+=======
+        click: function(){
+        titleGrabber = $(this).attr("data-word");
+        statusGrabber = $(this).attr("data-selected");
+        pantryGrabber = $(this).attr("data-pantry")
+        if((statusGrabber !== undefined) && (ingredientResetter === false) && (ingredientDeleter === false)){
+            if(statusGrabber === "no"){
+                $(this).attr("data-selected", "yes");
+                $(this).css("background", "#86d6d6");
+                if(pantryGrabber !== undefined){
+                    searchParamArray.push(pantryGrabber);
+                    console.log(searchParamArray);
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
                 }
                 if (statusGrabber === "yes") {
                     $(this).attr("data-selected", "no");
@@ -156,6 +176,7 @@ btnGrabber = function () {
 
                 oldDataLayer(oldDataGrabber, splicedDiced);
             }
+<<<<<<< HEAD
         }
     }, "button.cray-selector");
 }
@@ -167,6 +188,28 @@ function hasValue(arrPusher) {
                 sameValCheck = false;
             } else if ((ingredientResetter === true) || (ingredientDeleter === true)) {
                 if (value === arrPusher) {
+=======
+        };
+        if((ingredientResetter === true) || (ingredientDeleter === true)){
+            modalChecker = $(this).attr("data-modal");
+            console.log(modalChecker);
+            if(modalChecker === "no"){
+                oldDataGrabber = $(this).text();
+
+                oldDataLayer(oldDataGrabber, splicedDiced);
+            };
+        };
+    }}, "button.cray-selector");
+}
+
+function hasValue(arrPusher){
+    for(var i = 0; i < pantsArray.length; i++){
+        for (let value of Object.values(pantsArray[i])) {
+            if((value === arrPusher) && (ingredientResetter === false) && (ingredientDeleter === false)){
+                sameValCheck = false;
+            } else if ((ingredientResetter === true) || (ingredientDeleter === true)){
+                if(value === arrPusher){
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
                     tempArray = pantsArray[i].oldData.tempArray;
                     ingredientResetter = false;
                     ingredientDeleter = false;
@@ -218,6 +261,7 @@ pushToPantry = function () {
         itemResetArray = foodsArray;
         arrItem = "";
         arrItemShow = "";
+<<<<<<< HEAD
         $("div#pantry-items-show").empty();
         foodsArray = [];
         tempArray = [];
@@ -235,6 +279,40 @@ resetPantryItems = function () {
             resetSelector.attr("data-selected", "no");
             searchParamArray = [];
             ingredientResetter = true;
+=======
+        sameValCheck = true;
+        if(foodsArray.length > 0){
+            for(i = 0; i < foodsArray.length; i++){
+                arrItem += foodsArray[i] + "%20C";
+                arrItemShow += foodsArray[i] + " ";
+                orderPants = {arrItemShow: arrItemShow, arrItem, oldData:{tempArray}};
+            }
+            console.log(orderPants);
+        } else if (foodsArray.length === 0){
+            return;
+        };
+        hasValue(arrItemShow);
+        if(sameValCheck === true){
+            pantsArray.push(orderPants);
+            newPantsItem = $("<button>");
+            newPantsItem.text(arrItemShow);
+            newPantsItem.attr({
+                "data-pantry": arrItem,
+                "data-modal": "no",
+                "data-resetting": "no",
+                "data-deleting": "no",
+                "class": "card p-1 m-1 cray-selector second-cray",
+                "data-selected": "no"
+            });
+            newPantsItem.css("background", "#c7cfdb");
+            $("#pantry-items").append(newPantsItem);
+            itemResetArray = foodsArray;
+            arrItem = "";
+            arrItemShow = "";
+            $("div#pantry-items-show").empty();
+            foodsArray = [];
+            tempArray = [];
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
         }
         if (resetStatus === "yes") {
             thisButtonGrab.attr("data-resetting", "no");
@@ -246,6 +324,7 @@ resetPantryItems = function () {
     });
 };
 
+<<<<<<< HEAD
 deletePantryItems = function () {
     $("button#delete-pants-item").click(function () {
         thisButtonGrab = $("button#delete-pants-item");
@@ -265,6 +344,65 @@ deletePantryItems = function () {
             ingredientDeleter = false;
         };
 
+=======
+resetPantryItems = function(){
+    $("button#reset-pants-item").click(function(){
+        thisButtonGrab = $("button#reset-pants-item");
+        resetSelector = $("button.cray-selector.second-cray");
+        resetStatus = thisButtonGrab.attr("data-resetting");
+        deleteCheck = resetSelector.attr("data-deleting");
+        if(deleteCheck === "no"){
+            if(resetStatus === "no"){
+                thisButtonGrab.attr("data-resetting", "yes");
+                thisButtonGrab.attr("data-deleting", "no");
+                resetSelector.css("background", "#f28aca");
+                resetSelector.attr("data-selected", "no");
+                searchParamArray = [];
+                ingredientResetter = true;
+                ingredientDeleter = false;
+            };
+        };
+            
+        if(resetStatus === "yes"){
+            thisButtonGrab.attr("data-resetting", "no");
+            thisButtonGrab.attr("data-deleting", "no");
+            resetSelector.css("background", "#c7cfdb");
+            resetSelector.attr("data-selected", "no");
+            ingredientResetter = false;
+            ingredientDeleter = false;
+        };
+        
+    });
+};
+
+deletePantryItems = function(){
+    $("button#delete-pants-item").click(function(){
+        thisButtonGrab = $("button#delete-pants-item");
+        resetSelector = $("button.cray-selector.second-cray");
+        resetStatus = thisButtonGrab.attr("data-deleting");
+        resetCheck = resetSelector.attr("data-resetting");
+        if(resetCheck === "no"){
+            if(resetStatus === "no"){
+                thisButtonGrab.attr("data-deleting", "yes");
+                thisButtonGrab.attr("data-resetting", "no");
+                resetSelector.css("background", "#dd0837");
+                resetSelector.attr("data-selected", "no");
+                searchParamArray = [];
+                ingredientDeleter = true;
+                ingredientResetter = false;
+            };
+        };
+            
+        if(resetStatus === "yes"){
+            thisButtonGrab.attr("data-deleting", "no");
+            thisButtonGrab.attr("data-resetting", "no");
+            resetSelector.css("background", "#c7cfdb");
+            resetSelector.attr("data-selected", "no");
+            ingredientDeleter = false;
+            ingredientResetter = false;
+        };
+        
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
     });
 };
 
@@ -282,17 +420,28 @@ typedItemEntry = function () {
     });
 };
 
+<<<<<<< HEAD
 oldDataLayer = function (oldSelector, arrObjSplicer) {
     oldBtnSelector2 = $("button:contains(" + oldSelector + ")");
     oldBtnSelector2.remove();
     if (ingredientResetter === true) {
+=======
+oldDataLayer = function(oldSelector, arrObjSplicer){
+    oldBtnSelector2 = $("button:contains(" + oldSelector + ")");
+    oldBtnSelector2.remove();
+    if(ingredientResetter === true){
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
         hasValue(oldSelector);
         buttonSetterFunk();
         $("#my-modal").modal("toggle");
     } else {
         hasValue(oldSelector);
     };
+<<<<<<< HEAD
     if (splicedDiced !== -1) {
+=======
+    if(splicedDiced !== -1){
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
         pantsArray.splice(splicedDiced, 1);
     }
     $("button.cray-selector").css("background", "#c7cfdb");
@@ -318,13 +467,22 @@ previousIngredientsLister = function () {
     };
 };
 
+<<<<<<< HEAD
 scanButtonInput = function () {
     $("#pills-home-tab-btn").click(function () {
+=======
+scanButtonInput = function(){
+    $("#pills-home-tab-btn").click(function(){
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
         $("#my-modal").modal("toggle");
     });
 };
 
+<<<<<<< HEAD
 pageStarter = function () {
+=======
+pageStarter = function(){
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df
     previousIngredientsLister();
     resetPantryItems();
     deletePantryItems();
@@ -341,6 +499,7 @@ pageStarter = function () {
 
 
 //%20C for spaces 
+<<<<<<< HEAD
 
 © 2018 GitHub, Inc.
     Terms
@@ -357,3 +516,10 @@ Blog
 About
 
 Press h to open a hovercard with more details.
+=======
+//add delete entire item in modal
+/*add update for resetting in modal
+  so that user has to finish restting before adding
+  another item*/
+//*add button for cancelation of resetting or deleting
+>>>>>>> 43958b592923ec7286333678e04929df8b0666df

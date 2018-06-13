@@ -11,7 +11,7 @@ var config = {
 
 var recipe;
 var bars;
-var tempArray = []; //delete t1-t8 to make array empty after un commenting ajaxCallerBar()
+var tempArray = [];
 var foodsArray = [];
 var pantsArray;
 var searchParamArray = [];
@@ -104,7 +104,6 @@ btnGrabber = function(){
                 if(titleGrabber !== undefined){
                     if(!foodsArray.includes(titleGrabber)){
                         foodsArray.push(titleGrabber);
-                        console.log(foodsArray);
                     }
                 }
                 
@@ -114,18 +113,14 @@ btnGrabber = function(){
                 $(this).css("background", "#c7cfdb")
                 if(pantryGrabber !== undefined){
                     searchParamArray.splice($.inArray(pantryGrabber, searchParamArray),1);
-                    console.log("this this" +pantryGrabber);
-                    console.log(searchParamArray);
                 }
                 if(titleGrabber !== undefined){
                     foodsArray.splice($.inArray(titleGrabber, foodsArray),1);
-                    console.log(foodsArray);
                 }
             }
         };
         if((ingredientResetter === true) || (ingredientDeleter === true)){
             modalChecker = $(this).attr("data-modal");
-            console.log(modalChecker);
             if(modalChecker === "no"){
                 oldDataGrabber = $(this).text();
 
@@ -146,7 +141,6 @@ function hasValue(arrPusher){
                     ingredientResetter = false;
                     ingredientDeleter = false;
                     splicedDiced = i;
-                    console.log("splicer set at: " + splicedDiced);
                 };
             };
         }
@@ -174,7 +168,6 @@ pushToPantry = function(){
                 arrItemShow += foodsArray[i] + " ";
                 orderPants = {arrItemShow: arrItemShow, arrItem, oldData:{tempArray}};
             }
-            console.log(orderPants);
         } else if (foodsArray.length === 0){
             return;
         };
@@ -334,21 +327,8 @@ pageStarter = function(){
     resetPantryItems();
     deletePantryItems();
     btnGrabber();
-    //ajaxCallerBar(); //disregard the comment below this, we'll tie this to a button
-    buttonSetterFunk(); //delete this after uncommenting ajaxCallerBar()
     typedItemEntry();
     pantsSet();
     scanButtonInput();
     scannerAutoInput();
-}
-
-
-
-
-
-//%20C for spaces 
-//add delete entire item in modal
-/*add update for resetting in modal
-  so that user has to finish restting before adding
-  another item*/
-//*add button for cancelation of resetting or deleting
+};

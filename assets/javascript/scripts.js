@@ -159,7 +159,7 @@ btnGrabber = function () {
                     oldDataLayer(oldDataGrabber, splicedDiced);
                 };
             };
-        };
+        }
     }, "button.cray-selector");
 };
 
@@ -368,7 +368,7 @@ webCamScanner = function(){
         ScanditSDK.BarcodePicker.create(scannerContainer, {
                 playSoundOnScan: true,
                 vibrateOnScan: true
-            });
+            })
             .then(barcodePicker => {
                 picker = barcodePicker;
                 // Create the settings object to be applied to the scanner
@@ -397,12 +397,12 @@ webCamScanner = function(){
                     alert(error.message);
                 });
                 picker.resumeScanning();
-            });
+            })
             .catch(error => {
                 alert(error);
-            });
-    });
-};
+            })
+    })
+}
 
 scannerAutoInput = function () {
     $("#auto-scanner-input").on("keydown", function (e) {

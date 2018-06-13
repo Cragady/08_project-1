@@ -11,6 +11,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/styles/main.css" />
 
+
     <title>Chef in Your Pantry</title>
 </head>
 <!-- Optional JavaScript -->
@@ -25,40 +26,40 @@
 
 <body>
     <div class="container-fluid max">
-        <header>
-            <div class="row absolute-me">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <img src="assets/images/logo.png" class="logo" />
-                </div>
-                <div class="col-lg-8 col-md-6 col-sm-6 position-me">
-                    <nav class=" navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light  navbar-right shadow">
 
-                        <button class="navbar-toggler position-me" style="margin: 0 0 0 auto;" type="button " data-toggle="collapse " data-target="#navbarText
-                    " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
-                            <span class="navbar-toggler-icon "></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarText ">
-                            <ul class="navbar-nav mr-auto push-right">
-                                <li class="nav-item active ">
-                                    <a class="nav-link " href="# ">Saved Recipes
-                                        <span class="sr-only ">(current)</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link " href="# ">Features</a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link " href="# ">Pricing</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </nav>
-                    <div id="recipe-card"></div>
-                </div>
-
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <img src="assets/images/logo.png" class="logo" />
             </div>
-        </header>
+            <div class="col-lg-8 col-md-6 col-sm-6">
+                <!-- <nav class=" navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light  navbar-right shadow">
+
+                    <button class="navbar-toggler position-me" style="margin: 0 0 0 auto;" type="button " data-toggle="collapse " data-target="#navbarText
+                    " aria-controls="navbarText " aria-expanded="false " aria-label="Toggle navigation ">
+                        <span class="navbar-toggler-icon "></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText ">
+                        <ul class="navbar-nav mr-auto push-right">
+                            <li class="nav-item active ">
+                                <a class="nav-link " href="# ">Saved Recipes
+                                    <span class="sr-only ">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="# ">Features</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="# ">Pricing</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav> -->
+                <div id="main-recipe-container"></div>
+            </div>
+
+        </div>
+
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-6" style="margin-bottom: 1rem;">
                 <!-- THIS CARD USER CAN OPEN THE SCANNER API OR ENTER ITEM MANUALLY -->
@@ -87,7 +88,7 @@
 
                                         <div class="form-group mx-sm-3 mb-2">
                                             <label for="input-password-2" class="sr-only">ingredient</label>
-                                            <input type="text" class="form-control" id="input-password-2" placeholder="enter recipe">
+                                            <input type="text" class="form-control" id="input-password-2" placeholder="enter ingredient">
                                         </div>
                                         <button type="submit" id="quick-item-entry" class="btn btn-primary mb-2" style="margin: 1rem 0 0 auto;">Enter Ingredient</button>
                                     </form>
@@ -162,7 +163,7 @@
                         </button>
                     </div>
                     <div id="pantry-items-show" class="modal-body">
-                        .
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

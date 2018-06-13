@@ -21,7 +21,7 @@ var ingredientResetter = false;
 var ingredientDeleter = false;
 var splicedDiced = -1;
 var manuScanu;
-
+var executedSearch;
 
 /*sets the values required for the ajax calls
 then calls pageStarter() to activate button functionality*/
@@ -32,9 +32,9 @@ database.ref().on('value', function (snapshot) {
     pageStarter();
 });
 
-function ajaxCallerRec() {
+function ajaxCallerRec(rName) {
     $.ajax({
-        url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=noodles%2Ctomatoes",
+        url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=" + rName,
         // url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=noodles%2Ctomatoes",
         method: "GET",
 
@@ -44,30 +44,38 @@ function ajaxCallerRec() {
         }
     }).then(function (response) {
         console.log(response);
-        var recipeCard = $("#recipe-card");
+        var mainCards = $("#main-recipe-container");
+
+        var recipeCard = $("<div>");
+
         var recipeText = $("<div>");
         recipeText.attr("id", "recipe-text");
+        recipeCard.attr("id", "recipe-card");
         var recipeAddress = $("<div>");
-        recipeAddress.attr("id", "#recipe-address");
+        recipeAddress.attr("id", "recipe-address");
         // recipeCard.text(response.recipes[0].title);
         var title = response.recipes[0].title;
         var recipeImg = $("<img>");
+        var servings = response.recipes[0].servings;
         recipeImg.attr("src", response.recipes[0].image);
         var time = response.recipes[0].readyInMinutes;
         var address = response.recipes[0].spoonacularSourceUrl;
-
+        mainCards.append(recipeCard);
         recipeCard.append(recipeImg);
         recipeCard.append(recipeText);
-        recipeText.append(title);
-        recipeText.append(time);
-        recipeText.append(address);
+        recipeText.append("<span> <strong>Title:</strong> " + title + "</span>");
+        recipeText.append("<span> <strong>Total Time:</strong> " + time + "</span>");
+        recipeText.append("<span><strong> number of servings:</strong> " + servings);
+        recipeText.append("<div" + " class=" + '"' + "link-box" + '"' + "><strong>link:</strong> <a href=" + '"' + address + '"' + ">" + address + "</a></div>");
 
 
     });
 }
 function showRecipe() {
     $("#pants-array-set").click(function () {
-        ajaxCallerRec();
+        executedSearch = searchParamArray.join("");
+        ajaxCallerRec(executedSearch);
+        $("#main-recipe-container").addClass("border-me animated bounceInUp");
     });
 };
 

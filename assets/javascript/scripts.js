@@ -22,6 +22,7 @@ var ingredientDeleter = false;
 var splicedDiced = -1;
 var manuScanu;
 var executedSearch;
+var windowOpen = false;
 
 /*sets the values required for the ajax calls
 then calls pageStarter() to activate button functionality*/
@@ -361,7 +362,6 @@ webCamScanner = function(){
     continueButton.disabled = true;
     continueButton.hidden = true;
     let picker;
-    var windowOpen = false;
 
     $("#pills-home-tab-btn").click(function(){
         console.log("Scanner Loop here");

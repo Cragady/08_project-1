@@ -70,7 +70,7 @@ function ajaxCallerRec(rName) {
 
 
     });
-}
+};
 function showRecipe() {
     $("#pants-array-set").click(function () {
         executedSearch = searchParamArray.join("");
@@ -89,7 +89,7 @@ function ajaxCallerBar(newItemScan) {
         tempArray = string_to_array(obj.title);
         buttonSetterFunk();
     });
-}
+};
 
 /*takes response from ajaxCallerBar() and makes it 
 readable to browser*/
@@ -111,7 +111,7 @@ buttonSetterFunk = function () {
             "class": "btn m-1 cray-selector"
         });
         $("#pantry-items-show").append(newBtn);
-    }
+    };
 };
 
 btnGrabber = function () {
@@ -126,40 +126,34 @@ btnGrabber = function () {
         click: function () {
             titleGrabber = $(this).attr("data-word");
             statusGrabber = $(this).attr("data-selected");
-            pantryGrabber = $(this).attr("data-pantry")
+            pantryGrabber = $(this).attr("data-pantry");
             if ((statusGrabber !== undefined) && (ingredientResetter === false) && (ingredientDeleter === false)) {
                 if (statusGrabber === "no") {
                     $(this).attr("data-selected", "yes");
                     $(this).css("background", "#86d6d6");
                     if (pantryGrabber !== undefined) {
                         searchParamArray.push(pantryGrabber);
-                        console.log(searchParamArray);
-                    }
+                    };
                     if (titleGrabber !== undefined) {
                         if (!foodsArray.includes(titleGrabber)) {
                             foodsArray.push(titleGrabber);
-                            console.log(foodsArray);
-                        }
-                    }
+                        };
+                    };
 
-                }
+                };
                 if (statusGrabber === "yes") {
                     $(this).attr("data-selected", "no");
-                    $(this).css("background", "#c7cfdb")
+                    $(this).css("background", "#c7cfdb");
                     if (pantryGrabber !== undefined) {
                         searchParamArray.splice($.inArray(pantryGrabber, searchParamArray), 1);
-                        console.log("this this" + pantryGrabber);
-                        console.log(searchParamArray);
-                    }
+                    };
                     if (titleGrabber !== undefined) {
                         foodsArray.splice($.inArray(titleGrabber, foodsArray), 1);
-                        console.log(foodsArray);
-                    }
-                }
+                    };
+                };
             };
             if ((ingredientResetter === true) || (ingredientDeleter === true)) {
                 modalChecker = $(this).attr("data-modal");
-                console.log(modalChecker);
                 if (modalChecker === "no") {
                     oldDataGrabber = $(this).text();
 
@@ -168,7 +162,7 @@ btnGrabber = function () {
             };
         }
     }, "button.cray-selector");
-}
+};
 
 function hasValue(arrPusher) {
     for (var i = 0; i < pantsArray.length; i++) {
@@ -181,12 +175,11 @@ function hasValue(arrPusher) {
                     ingredientResetter = false;
                     ingredientDeleter = false;
                     splicedDiced = i;
-                    console.log("splicer set at: " + splicedDiced);
                 };
             };
-        }
-    }
-}
+        };
+    };
+};
 
 pantsSet = function () {
     $("#pants-array-btn").click(function () {
@@ -205,8 +198,7 @@ pushToPantry = function () {
             arrItem += foodsArray[i] + "%20C";
             arrItemShow += foodsArray[i] + " ";
             orderPants = { arrItemShow: arrItemShow, arrItem, oldData: { tempArray } };
-        }
-        console.log(orderPants);
+        };
     } else if (foodsArray.length === 0) {
         return;
     };
@@ -231,7 +223,7 @@ pushToPantry = function () {
         $("div#pantry-items-show").empty();
         foodsArray = [];
         tempArray = [];
-    }
+    };
 };
 
 resetPantryItems = function () {
@@ -302,7 +294,7 @@ typedItemEntry = function () {
         tempArray = typedPantryItem;
         for (i = 0; i < typedPantryItem.length; i++) {
             foodsArray.push(typedPantryItem[i]);
-        }
+        };
         $("#input-password-2").val("");
         pushToPantry();
     });
@@ -320,7 +312,7 @@ oldDataLayer = function (oldSelector, arrObjSplicer) {
     };
     if (splicedDiced !== -1) {
         pantsArray.splice(splicedDiced, 1);
-    }
+    };
     $("button.cray-selector").css("background", "#c7cfdb");
 
 };
@@ -338,7 +330,7 @@ previousIngredientsLister = function () {
             });
             oldPantsItem.css("background", "#c7cfdb");
             $("#pantry-items").append(oldPantsItem);
-        }
+        };
     } else {
         pantsArray = [];
     };
@@ -421,9 +413,9 @@ webCamScanner = function(){
             })
             .catch(error => {
                 alert(error);
-            });
+            })
     })
-};
+}
 
 scannerAutoInput = function () {
     $("#auto-scanner-input").on("keydown", function (e) {
@@ -447,5 +439,5 @@ pageStarter = function () {
     webCamScanner();
     scannerAutoInput();
     showRecipe();
-}
+};
 

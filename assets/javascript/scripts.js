@@ -110,7 +110,7 @@ buttonSetterFunk = function () {
             "data-modal": "yes",
             "class": "btn m-1 cray-selector"
         });
-        $("#pantry-items-show").append(newBtn);
+        $("#pantry-items-show-two").append(newBtn);
     };
 };
 
@@ -183,7 +183,6 @@ function hasValue(arrPusher) {
 
 pantsSet = function () {
     $("#pants-array-btn").click(function () {
-        windowOpen = false;
         pushToPantry();
         $("#my-modal").modal("toggle");
     });
@@ -195,7 +194,7 @@ pushToPantry = function () {
     sameValCheck = true;
     if (foodsArray.length > 0) {
         for (i = 0; i < foodsArray.length; i++) {
-            arrItem += foodsArray[i] + "%20C";
+            arrItem += foodsArray[i].toLowerCase() + "%20C";
             arrItemShow += foodsArray[i] + " ";
             orderPants = { arrItemShow: arrItemShow, arrItem, oldData: { tempArray } };
         };
@@ -220,7 +219,7 @@ pushToPantry = function () {
         itemResetArray = foodsArray;
         arrItem = "";
         arrItemShow = "";
-        $("div#pantry-items-show").empty();
+        $("div#pantry-items-show-two").empty();
         foodsArray = [];
         tempArray = [];
     };

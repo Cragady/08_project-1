@@ -33,6 +33,7 @@ database.ref().on('value', function (snapshot) {
 function ajaxCallerRec() {
     $.ajax({
         url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=noodles%2Ctomatoes",
+        // url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=noodles%2Ctomatoes",
         method: "GET",
 
         headers: {

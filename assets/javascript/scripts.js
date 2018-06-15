@@ -189,6 +189,7 @@ function hasValue(arrPusher) {
 
 pantsSet = function () {
     $("#pants-array-btn").click(function () {
+        windowOpen = false;
         pushToPantry();
         $("#my-modal").modal("toggle");
     });
@@ -349,9 +350,26 @@ scanButtonInput = function () {
 };
 
 webCamScanner = function(){
+ 
+    // const engineLocation = "build"; // the folder containing the engine
+    // or, if using a CDN,
+    const engineLocation = "https://unpkg.com/scandit-sdk/build"
+    ScanditSDK.configure(bars2, { engineLocation: engineLocation });
+    const scannerContainer = document.getElementById("scandit-barcode-picker");
+    const resultContainer = document.getElementById("scandit-barcode-result");
+    const continueButton = document.getElementById("continue-scanning-button");
+    continueButton.disabled = true;
+    continueButton.hidden = true;
+    let picker;
+    var windowOpen = false;
+
     $("#pills-home-tab-btn").click(function(){
-        console.log("hello world!");
-        // Al's crap here
+        console.log("Scanner Loop here");
+        if (windowOpen == true){
+            continueScanning();
+            $("#scandit-barcode-picker").empty();
+            console.log("window is open");
+        };
         // Helper function called when the "Continue Scanning" button is clicked
         function continueScanning() {
             if (picker) {
@@ -360,23 +378,13 @@ webCamScanner = function(){
                 picker.resumeScanning();
             }
         }
-        // Configure the library and activate it with a license key
-        const licenseKey = bars2;
-        // const engineLocation = "build"; // the folder containing the engine
-        // or, if using a CDN,
-        const engineLocation = "https://unpkg.com/scandit-sdk/build"
-        ScanditSDK.configure(licenseKey, { engineLocation: engineLocation });
-        const scannerContainer = document.getElementById("scandit-barcode-picker");
-        const resultContainer = document.getElementById("scandit-barcode-result");
-        const continueButton = document.getElementById("continue-scanning-button");
-        continueButton.disabled = true;
-        continueButton.hidden = true;
-        let picker;
+        windowOpen = true
         // Create & start the picker
         ScanditSDK.BarcodePicker.create(scannerContainer, {
                 playSoundOnScan: true,
-                vibrateOnScan: true
+                vibrateOnScan: true,
             })
+            
             .then(barcodePicker => {
                 picker = barcodePicker;
                 // Create the settings object to be applied to the scanner
@@ -395,11 +403,16 @@ webCamScanner = function(){
                     picker.pauseScanning();
                     resultContainer.innerHTML = scanResult.barcodes.reduce((string, barcode) =>
                         string +
-                        `${ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology)}: ${barcode.data}<br>`,
+                        `${ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology)}: ${barcode.data}`,
                         '');
                         console.log(resultContainer.innerHTML);
-                        // localStorage.setItem("barcode", username);
+                        $("#auto-scanner-input").val((resultContainer.innerHTML).slice(8));
+                        manuScanu = $("#auto-scanner-input").val();
+                        console.log(manuScanu);
+                        $("#auto-scanner-input").val("");
+                        ajaxCallerBar(manuScanu);
                         continueScanning()
+                       
                 });
                 picker.onScanError(error => {
                     alert(error.message);

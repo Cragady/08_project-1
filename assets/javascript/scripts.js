@@ -194,10 +194,11 @@ pushToPantry = function () {
     sameValCheck = true;
     if (foodsArray.length > 0) {
         for (i = 0; i < foodsArray.length; i++) {
-            arrItem += foodsArray[i].toLowerCase() + "%20C";
+            arrItem += foodsArray[i].toLowerCase() + " ";
             arrItemShow += foodsArray[i] + " ";
             orderPants = { arrItemShow: arrItemShow, arrItem, oldData: { tempArray } };
         };
+        arrItem += "%20C";
     } else if (foodsArray.length === 0) {
         return;
     };

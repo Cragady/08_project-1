@@ -15,3 +15,19 @@ Once the user has the desired ingredients they hit search recipe.  A recipe will
 
 **API's**
 API's used: spoontacular & ScandIt & UPC
+
+**APP Opportunities**
+* Login to SAVEfavorite recipes. Using Facebook  API?
+* Share Favorite Recipes with CP users, including Social Media
+* Create your OWN recipes and share them.
+* Add more info such as cuisine, vegan, vegetarian, calories, etc. 
+* Add allergic conscious searches to “filter” out recipe searches such as peanuts, milt, gluten, etc.
+* Utilize data-scrapers instead of spoonacular api
+* Create our own API
+* Use backend languages to manage databases and our API's
+* Utilize a database for storing barcodes to use that instead of a data-scraper
+* Find a way to Utilize camera's/scanners without outside API usage
+
+**Ironing Board (Future things to Fix/Improve)**
+* How things are stored in the searchParamArray, spacing issues, what will work best
+* Get rid of potential commas

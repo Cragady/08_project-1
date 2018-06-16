@@ -31,3 +31,7 @@ API's used: spoontacular & ScandIt & UPC
 **Ironing Board (Future things to Fix/Improve)**
 * How things are stored in the searchParamArray, spacing issues, what will work best
 * Get rid of potential commas
+* Have a way for user to correct abbreviated words
+
+**Extra**
+Site can also be reached through chefinyourpantry.com

@@ -34,4 +34,5 @@ API's used: spoontacular & ScandIt & UPC
 * Have a way for user to correct abbreviated words
 
 **Extra**
+
 Site can also be reached through chefinyourpantry.com

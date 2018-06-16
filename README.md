@@ -36,3 +36,5 @@ API's used: spoontacular & ScandIt & UPC
 **Extra**
 
 Site can also be reached through chefinyourpantry.com
+
+Site is also mobile ready/responsive
